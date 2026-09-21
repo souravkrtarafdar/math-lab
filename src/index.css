@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KaTeX needs its stylesheet for correct math typesetting */
+@import "katex/dist/katex.min.css";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-lab-bg text-lab-text antialiased;
+  font-feature-settings: "ss01" on;
+}
+
+/* Respect reduced-motion preferences across the app */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom slider thumb — used by ParameterSlider so every parameter
+   control across the site shares one tactile, "instrument panel" feel */
+input[type="range"].lab-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    #5fe3e0 var(--range-fill, 50%),
+    #232b45 var(--range-fill, 50%)
+  );
+  outline: none;
+}
+
+input[type="range"].lab-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #e9edf7;
+  border: 2px solid #5fe3e0;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+
+input[type="range"].lab-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type="range"].lab-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #e9edf7;
+  border: 2px solid #5fe3e0;
+  cursor: pointer;
+}
+
+/* Visible keyboard focus ring everywhere, styled to match the palette */
+:focus-visible {
+  outline: 2px solid #5fe3e0;
+  outline-offset: 2px;
+}
